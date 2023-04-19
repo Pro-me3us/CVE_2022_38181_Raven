@@ -28,6 +28,5 @@ overwrite addr : 104300634 634
 overwrite addr : 1041001c4 1c4
 overwrite addr : 1043001c4 1c4
 result 50
-raven:/ #
 raven:/ # 
 ```

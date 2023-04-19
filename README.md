@@ -9,8 +9,8 @@ android-ndk-r21d/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androide
 The exploit should be run 30-90sec after the Cube boots for greatest reliability.
 ```
 raven:/ $ /data/local/tmp/raven_shrinker<br>
-fingerprint: Amazon/raven/raven:9/PS7624.3337N/0026810845440:user/amz-p,release-keys<br>
-failed, retry.<br>
+fingerprint: Amazon/raven/raven:9/PS7624.3337N/0026810845440:user/amz-p,release-keys
+failed, retry.
 failed, retry.<br>
 failed, retry.<br>
 failed, retry.<br>

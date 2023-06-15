@@ -12,8 +12,6 @@
 #include <sys/system_properties.h>
 #include <sys/syscall.h>
 
-#include <linux/bpf.h>
-
 #include "mali.h"
 #include "mali_base_jm_kernel.h"
 #include "midgard.h"

